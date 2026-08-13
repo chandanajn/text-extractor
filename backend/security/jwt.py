@@ -6,6 +6,7 @@ from jose import jwt
 from core.config import settings
 
 
+
 def create_access_token(
     subject: str | Any, expires_delta: timedelta | None = None
 ) -> str:
