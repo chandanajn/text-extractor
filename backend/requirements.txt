@@ -1,0 +1,14 @@
+fastapi
+uvicorn
+sqlalchemy
+psycopg2-binary
+alembic
+pytesseract
+Pillow
+python-multipart
+python-jose[cryptography]
+passlib[bcrypt]
+bcrypt==3.2.2
+opencv-python-headless
+reportlab
+pydantic-settings

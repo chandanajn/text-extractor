@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Extractor API</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Background Elements -->
+    <div class="bg-shape shape1"></div>
+    <div class="bg-shape shape2"></div>
+
+    <div class="app-container">
+        
+        <!-- Sidebar / History Panel -->
+        <aside class="sidebar glass">
+            <div class="sidebar-header">
+                <h2><i class="fa-solid fa-clock-rotate-left"></i> History</h2>
+                <button id="refresh-btn" class="icon-btn" title="Refresh History"><i class="fa-solid fa-arrows-rotate"></i></button>
+            </div>
+            <div class="history-list" id="history-list">
+                <!-- History items will be injected here -->
+                <div class="loading-text">Loading records...</div>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <header class="header glass">
+                <h1>Text Extractor <span class="gradient-text">AI</span></h1>
+                <p>Upload an image and instantly extract text using powerful OCR technology.</p>
+            </header>
+
+            <section class="upload-section">
+                <div class="upload-zone glass" id="drop-zone">
+                    <input type="file" id="file-input" accept="image/png, image/jpeg" hidden>
+                    <div class="upload-content">
+                        <i class="fa-solid fa-cloud-arrow-up upload-icon"></i>
+                        <h3>Drag & Drop your image here</h3>
+                        <p>or</p>
+                        <button class="btn primary-btn" onclick="document.getElementById('file-input').click()">Browse Files</button>
+                        <span class="file-hint">Supports: PNG, JPG</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Results Section (Hidden by default) -->
+            <section class="results-section glass hidden" id="results-section">
+                <div class="results-header">
+                    <h2>Extraction Result</h2>
+                    <button class="btn secondary-btn" id="copy-btn"><i class="fa-solid fa-copy"></i> Copy Text</button>
+                </div>
+                <div class="results-grid">
+                    <div class="image-preview-container">
+                        <img id="image-preview" src="" alt="Uploaded Image">
+                    </div>
+                    <div class="text-output-container">
+                        <textarea id="text-output" readonly placeholder="Extracted text will appear here..."></textarea>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay hidden" id="loading-overlay">
+        <div class="spinner"></div>
+        <p>Extracting text...</p>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>
