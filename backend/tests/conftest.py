@@ -1,12 +1,12 @@
+from collections.abc import Generator
+
 import pytest
 from fastapi.testclient import TestClient
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from typing import Generator
 
-from main import app
 from database.session import Base, get_db
-from core.config import settings
+from main import app
 
 # Create a test database URL (sqlite in memory or separate postgres DB).
 # Here we'll use a local test database for simplicity if possible, or just the same DB if we have to.
@@ -18,11 +18,13 @@ engine = create_engine(
 )
 TestingSessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
+
 @pytest.fixture(scope="session")
 def db_engine():
     Base.metadata.create_all(bind=engine)
     yield engine
     Base.metadata.drop_all(bind=engine)
+
 
 @pytest.fixture(scope="function")
 def db_session(db_engine) -> Generator:
@@ -33,6 +35,7 @@ def db_session(db_engine) -> Generator:
     session.close()
     transaction.rollback()
     connection.close()
+
 
 @pytest.fixture(scope="function")
 def client(db_session) -> Generator:

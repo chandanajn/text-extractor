@@ -1,26 +1,30 @@
-from pydantic import BaseModel
-from typing import Optional
 from datetime import datetime
+
+from pydantic import BaseModel
+
 
 class OCRRecordBase(BaseModel):
     filename: str
-    language: Optional[str] = "eng"
-    confidence: Optional[float] = None
-    processing_time: Optional[float] = None
-    text: Optional[str] = None
+    language: str | None = "eng"
+    confidence: float | None = None
+    processing_time: float | None = None
+    text: str | None = None
+
 
 class OCRRecordCreate(OCRRecordBase):
     stored_filename: str
     image_path: str
     user_id: int
 
+
 class OCRRecord(OCRRecordBase):
     id: int
     user_id: int
     created_at: datetime
-    updated_at: Optional[datetime] = None
+    updated_at: datetime | None = None
 
     model_config = {"from_attributes": True}
+
 
 class PaginatedOCRResponse(BaseModel):
     total: int
