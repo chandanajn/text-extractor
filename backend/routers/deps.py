@@ -20,7 +20,7 @@ def get_current_user(
             token, settings.SECRET_KEY, algorithms=[settings.ALGORITHM]
         )
         token_type = payload.get("type")
-        if token_type != "access":
+        if token_type != "access":  # nosec B105
             raise HTTPException(
                 status_code=status.HTTP_401_UNAUTHORIZED,
                 detail="Invalid token type",

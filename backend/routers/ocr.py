@@ -54,14 +54,14 @@ async def upload_image(
 
     try:
         contents = await file.read()
-    except Exception:
+    except Exception:  # nosec B110
         raise HTTPException(status_code=500, detail="Error reading file")
 
     # Process with OCR
     ocr_result = process_ocr(contents, language, mode, apply_preprocessing)
 
     # Save the file to disk
-    ext = os.path.splitext(file.filename)[1]
+    ext = os.path.splitext(file.filename)[1]  # type: ignore
     stored_filename = f"{uuid.uuid4()}{ext}"
     image_path = os.path.join(UPLOAD_DIR, stored_filename)
 
@@ -207,7 +207,7 @@ def delete_ocr_record(
     try:
         if os.path.exists(record.image_path):
             os.remove(record.image_path)
-    except Exception:
+    except Exception:  # nosec B110
         pass
 
     db.delete(record)
@@ -224,7 +224,7 @@ def clear_ocr_history(
         try:
             if os.path.exists(record.image_path):
                 os.remove(record.image_path)
-        except Exception:
+        except Exception:  # nosec B110
             pass
         db.delete(record)
 

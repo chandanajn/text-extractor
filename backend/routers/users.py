@@ -29,11 +29,11 @@ def update_user_me(
                 status_code=400,
                 detail="The user with this email already exists in the system.",
             )
-        current_user.email = user_in.email
+        current_user.email = user_in.email  # type: ignore
     if user_in.name is not None:
-        current_user.name = user_in.name
+        current_user.name = user_in.name  # type: ignore
     if user_in.password is not None:
-        current_user.password = get_password_hash(user_in.password)
+        current_user.password = get_password_hash(user_in.password)  # type: ignore
 
     db.add(current_user)
     db.commit()

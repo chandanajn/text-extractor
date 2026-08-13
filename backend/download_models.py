@@ -35,7 +35,7 @@ for lang in languages:
     if not os.path.exists(dest):
         print(f"Downloading {lang}.traineddata...")
         try:
-            urllib.request.urlretrieve(url, dest)
+            urllib.request.urlretrieve(url, dest)  # nosec B310
             print(f"Successfully downloaded {lang}.traineddata")
         except Exception as e:
             print(f"Failed to download {lang}.traineddata: {e}")

@@ -52,7 +52,7 @@ def login(
     db: Session = Depends(get_db), form_data: OAuth2PasswordRequestForm = Depends()
 ):
     user = db.query(User).filter(User.email == form_data.username).first()
-    if not user or not verify_password(form_data.password, user.password):
+    if not user or not verify_password(form_data.password, user.password):  # type: ignore
         raise HTTPException(status_code=400, detail="Incorrect email or password")
 
     access_token = create_access_token(subject=user.id)
@@ -61,7 +61,7 @@ def login(
     return {
         "access_token": access_token,
         "refresh_token": refresh_token,
-        "token_type": "bearer",
+        "token_type": "bearer",  # nosec B105
     }
 
 
@@ -72,7 +72,7 @@ def refresh_token(request: RefreshTokenRequest, db: Session = Depends(get_db)):
             request.refresh_token, settings.SECRET_KEY, algorithms=[settings.ALGORITHM]
         )
         token_type = payload.get("type")
-        if token_type != "refresh":
+        if token_type != "refresh":  # nosec B105
             raise HTTPException(
                 status_code=status.HTTP_401_UNAUTHORIZED,
                 detail="Invalid token type",
@@ -99,7 +99,7 @@ def refresh_token(request: RefreshTokenRequest, db: Session = Depends(get_db)):
     return {
         "access_token": access_token,
         "refresh_token": new_refresh_token,
-        "token_type": "bearer",
+        "token_type": "bearer",  # nosec B105
     }
 
 

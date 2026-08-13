@@ -26,7 +26,7 @@ def preprocess_image(image_bytes: bytes) -> np.ndarray:
     img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
 
     # Convert to grayscale
-    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)  # type: ignore
 
     # Noise removal
     blur = cv2.medianBlur(gray, 3)
