@@ -3,11 +3,15 @@ name: CI Workflow
 on:
   push:
     branches: ["main", "master"]
+
   pull_request:
     branches: ["main", "master"]
 
 jobs:
 
+  # =========================
+  # BACKEND CI
+  # =========================
   backend:
     name: Backend CI
     runs-on: ubuntu-latest
@@ -55,6 +59,9 @@ jobs:
         run: pytest
 
 
+  # =========================
+  # FRONTEND CI
+  # =========================
   frontend:
     name: Frontend CI
     runs-on: ubuntu-latest
@@ -80,12 +87,13 @@ jobs:
       - name: Run ESLint
         run: npm run lint
 
-
-
       - name: Build Frontend
         run: npm run build
 
 
+  # =========================
+  # SONARQUBE
+  # =========================
   sonarqube:
     name: SonarQube Analysis
     needs: [backend, frontend]
@@ -102,9 +110,13 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
+
+  # =========================
+  # DOCKER + TRIVY
+  # =========================
   docker:
-    name: Docker Build & Compose
-    needs: [backend, frontend]
+    name: Docker Build & Security Scan
+    needs: [backend, frontend, sonarqube]
     runs-on: ubuntu-latest
 
     steps:
@@ -117,6 +129,21 @@ jobs:
       - name: Build Docker Compose Services
         run: docker compose build
 
+      # -------------------------
+      # Trivy Filesystem Scan
+      # -------------------------
+      - name: Trivy Filesystem Scan
+        uses: aquasecurity/trivy-action@v0.36.0
+        with:
+          scan-type: fs
+          scan-ref: .
+          severity: CRITICAL,HIGH
+          exit-code: 1
+          ignore-unfixed: true
+
+      # -------------------------
+      # Docker Compose Test
+      # -------------------------
       - name: Test Docker Compose
         run: |
           docker compose up -d
