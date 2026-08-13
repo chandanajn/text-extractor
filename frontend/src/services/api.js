@@ -44,7 +44,7 @@ api.interceptors.response.use(
           
           originalRequest.headers['Authorization'] = `Bearer ${access_token}`;
           return api(originalRequest);
-        } catch (err) {
+        } catch {
           // If refresh token fails, clear local storage and redirect to login
           localStorage.removeItem('access_token');
           localStorage.removeItem('refresh_token');

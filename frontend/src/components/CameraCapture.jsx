@@ -15,7 +15,7 @@ const CameraCapture = ({ onClose, onCapture, selectedLanguage }) => {
         if (videoRef.current) {
           videoRef.current.srcObject = mediaStream;
         }
-      } catch (err) {
+      } catch {
         setError('Camera access denied or unavailable.');
       }
     };
@@ -25,7 +25,7 @@ const CameraCapture = ({ onClose, onCapture, selectedLanguage }) => {
         stream.getTracks().forEach(track => track.stop());
       }
     };
-  }, []);
+  }, [stream]);
 
   const handleCapture = () => {
     if (videoRef.current) {

@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState } from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Upload as UploadIcon, FileImage, Settings2, Loader2, Download, Copy, Scan, Sparkles } from 'lucide-react';
 import api from '../services/api';

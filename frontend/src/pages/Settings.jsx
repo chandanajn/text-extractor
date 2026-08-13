@@ -3,12 +3,12 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { AuthContext } from '../context/AuthContext';
 import { ThemeContext } from '../context/ThemeContext';
 import api from '../services/api';
-import { User as UserIcon, Lock, Moon, Sun, Save, CheckCircle } from 'lucide-react';
+import { User as UserIcon, Sun, Save, CheckCircle } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const Settings = () => {
   const { user } = useContext(AuthContext);
-  const { theme, toggleTheme, setTheme } = useContext(ThemeContext);
+  const { theme, toggleTheme } = useContext(ThemeContext);
   const queryClient = useQueryClient();
   
   const [activeTab, setActiveTab] = useState('profile');

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import api from '../services/api';
-import { FileText, Download, Calendar, Activity, ChevronLeft, ChevronRight, FileJson } from 'lucide-react';
+import { FileText, Download, Calendar, ChevronLeft, ChevronRight, FileJson } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const Exports = () => {

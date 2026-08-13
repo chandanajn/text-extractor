@@ -27,7 +27,7 @@ const UrlUploadDialog = ({ onClose, onUpload, selectedLanguage }) => {
       
       const file = new File([blob], `url_image${ext}`, { type: blob.type });
       onUpload(file);
-    } catch (err) {
+    } catch {
       setError('Failed to load image from URL. It might be blocked by CORS or invalid.');
     } finally {
       setLoading(false);

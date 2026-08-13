@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Outlet, Navigate, useLocation } from 'react-router-dom';
+import { Outlet, Navigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import Header from './Header';
 import Footer from './Footer';

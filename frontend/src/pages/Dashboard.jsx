@@ -1,8 +1,8 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import api from '../services/api';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Image as ImageIcon, Zap, Clock, Globe, HardDrive, CheckCircle, FileText, Target } from 'lucide-react';
+import { Zap, Clock, Globe, HardDrive, CheckCircle, FileText, Target } from 'lucide-react';
 
 import PageContainer from '../components/PageContainer';
 import StatCard from '../components/StatCard';
@@ -48,7 +48,7 @@ const LANGUAGE_OPTIONS = [
 ];
 
 const Dashboard = () => {
-  const [file, setFile] = useState(null);
+  const [_file, setFile] = useState(null);
   const [preview, setPreview] = useState(null);
   const [result, setResult] = useState(null);
   const [isCameraOpen, setIsCameraOpen] = useState(false);
